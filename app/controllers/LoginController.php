@@ -12,11 +12,18 @@ use View;
 
 class LoginController extends BaseController {
    
-
+    /**
+     * 
+     * @return View
+     */
     public function index() {
         return View::make('login.index');
     }
     
+    /**
+     * 
+     * @return Redirect
+     */
     public function prosesLogin() {
         $inp = Input::all();
         $rules = [
@@ -41,6 +48,10 @@ class LoginController extends BaseController {
         }
     }
     
+    /**
+     * 
+     * @return Redirect
+     */
     public function doLogout(){
         Auth::Logout();
         return Redirect::to('login');

@@ -10,6 +10,10 @@ class Kegiatan extends Eloquent {
     
     public $timestamps = false;
 
+    /**
+     * 
+     * @return $this->belongTo
+     */
     public function users() {
         return $this->belongsTo("App\\Models\\Users");
     }

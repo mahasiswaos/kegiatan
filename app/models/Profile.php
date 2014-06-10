@@ -10,6 +10,10 @@ class Profile extends Eloquent {
     
     public $timestamps = true;
 
+    /**
+     * 
+     * @return $this->belongTo
+     */
     public function users() {
         return $this->belongsTo("App\\Models\\Users");
     }

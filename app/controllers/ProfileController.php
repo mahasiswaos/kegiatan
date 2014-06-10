@@ -18,7 +18,11 @@ use Redirect;
 use Session;
 
 class ProfileController extends AdminController {
-
+    
+    /**
+     * 
+     * @return View
+     */
     public function profileView() {
         $input = Profile::all();
         $data = [
@@ -27,6 +31,10 @@ class ProfileController extends AdminController {
         return View::make('profile.view', $data);
     }
 
+    /**
+     * 
+     * @return View
+     */
     public function prifileAdd() {
         $user = Users::all();
         $data = [
@@ -35,6 +43,10 @@ class ProfileController extends AdminController {
         return View::make('profile.add', $data);
     }
 
+    /**
+     * 
+     * @return Redirect
+     */
     public function prosesAdd() {
         $rules = [
             'id' => 'required',
@@ -66,7 +78,6 @@ class ProfileController extends AdminController {
             //menuju folder public
             Input::file('gambar')->move($pathFile, $filename);
 
-
             $prof = new Profile;
             $in = Input::all();
             $prof->users_id = $in['id'];
@@ -85,6 +96,11 @@ class ProfileController extends AdminController {
         }
     }
 
+    /**
+     * 
+     * @param type $id
+     * @return View
+     */
     public function profileEdit($id) {
         $profil = Profile::find($id);
         $user = $profil->users;
@@ -95,6 +111,11 @@ class ProfileController extends AdminController {
         return View::make('profile.edit', $data);
     }
 
+    /**
+     * 
+     * @param type $id
+     * @return Redirect
+     */
     public function prosesUpdate($id) {
         $rules = [
             'id' => 'required',
@@ -145,6 +166,11 @@ class ProfileController extends AdminController {
         }
     }
 
+    /**
+     * 
+     * @param type $id
+     * @return Redirect
+     */
     public function profileDelete($id) {
         $user = Profile::find($id);
         $user->delete();

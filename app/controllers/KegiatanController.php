@@ -19,6 +19,10 @@ use Redirect;
 
 class KegiatanController extends AdminController {
 
+    /**
+     * 
+     * @return View
+     */
     public function kegiatanView() {
         $input = Kegiatan::all();
         $data = [
@@ -26,7 +30,11 @@ class KegiatanController extends AdminController {
         ];
         return View::make('kegiatan.view', $data);
     }
-
+    
+    /**
+     * 
+     * @return View
+     */
     public function kegiatanAdd() {
         $user = Users::all();
         $data = [
@@ -35,6 +43,10 @@ class KegiatanController extends AdminController {
         return View::make('kegiatan.add', $data);
     }
 
+    /**
+     * 
+     * @return Redirect
+     */
     public function prosesAdd() {
         $rules = [
             'id' => 'required',
@@ -69,6 +81,11 @@ class KegiatanController extends AdminController {
         }
     }
 
+    /**
+     * 
+     * @param type $id
+     * @return View And Redirect
+     */
     public function kegiatanEdit($id) {
         $ket = Kegiatan::find($id);
         $user = $ket->users;
@@ -79,6 +96,11 @@ class KegiatanController extends AdminController {
         return View::make('kegiatan.edit', $data);
     }
 
+    /**
+     * 
+     * @param type $id
+     * @return Redirect
+     */
     public function prosesUpdate($id) {
         // validation
         $rules = [
@@ -110,6 +132,11 @@ class KegiatanController extends AdminController {
         }
     }
 
+    /**
+     * 
+     * @param type $id
+     * @return Redirect
+     */
     public function kegiatanDelete($id) {
         $user = Kegiatan::find($id);
         $user->delete();

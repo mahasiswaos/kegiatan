@@ -20,15 +20,27 @@ use Illuminate\Support\Facades\Paginator;
  * class userController
  */
 class UserController extends AdminController {
-
+    
+    /**
+     * 
+     * @return View
+     */
     public function index() {
         return View::make('users.index');
     }
 
+    /**
+     * 
+     * @return View
+     */
     public function userAdd() {
         return View::make('users.add');
     }
 
+    /**
+     * 
+     * @return Redirect
+     */
     public function prosesAdd() {
         $rules = [
             'username' => 'required',
@@ -63,6 +75,11 @@ class UserController extends AdminController {
         }
     }
 
+    /**
+     * 
+     * @param type $id
+     * @return View
+     */
     public function userEdit($id) {
         $user = Users::find($id);
         $data = [
@@ -71,6 +88,11 @@ class UserController extends AdminController {
         return View::make('users.edit', $data);
     }
 
+    /**
+     * 
+     * @param type $id
+     * @return Redirect
+     */
     public function prosesUpdate($id) {
         // validation
         $rules = array(
@@ -100,7 +122,11 @@ class UserController extends AdminController {
             return Redirect::to('/users/view');
         }
     }
-
+    
+    /**
+     * 
+     * @return View
+     */
     public function userView() {
         $user_pag = Users::paginate(2);
         $data = [
@@ -110,8 +136,12 @@ class UserController extends AdminController {
         return View::make('users.view', $data);
     }
 
+    /**
+     * 
+     * @param type $id
+     * @return Redirect
+     */
     public function userDelete($id) {
-        // delete
         $user = Users::find($id);
         $user->delete();
         Session::flash('message', 'Successfully deleted the Users!');
