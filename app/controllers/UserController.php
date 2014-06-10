@@ -1,0 +1,121 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Controllers\AdminController;
+use App\Controllers\BaseController;
+use App\Models\Users;
+use View;
+use Input;
+use Hash;
+use Validator;
+use Redirect;
+use Session;
+use Illuminate\Support\Facades\Paginator;
+/**
+ * Description of TestController
+ *
+ * @author aljufry
+ * 
+ * class userController
+ */
+class UserController extends AdminController {
+
+    public function index() {
+        return View::make('users.index');
+    }
+
+    public function userAdd() {
+        return View::make('users.add');
+    }
+
+    public function prosesAdd() {
+        $rules = [
+            'username' => 'required',
+            'password' => 'required',
+            'email' => 'required|email',
+            'level' => 'required',
+        ];
+        $validator = Validator::make(Input::all(), $rules);
+        /*
+         * jika tidak valid redirect kembali ke halaman create
+         */
+        if ($validator->fails()) {
+            return Redirect::to('/users/add')->withErrors($validator);
+        } else {
+            /*
+             * jika valid simpan ke database
+             */
+            $in = Input::all();
+            $pass = $in['password'];
+            $pass = Hash::make($pass);
+            $user = new Users;
+            $user->username = $in['username'];
+            $user->password = $pass;
+            $user->email = $in['email'];
+            $user->level = $in['level'];
+            $user->save();
+            /*
+             * redirect ke index bands
+             */
+            Session::flash('message', 'Successfully created band!');
+            return Redirect::to('/users/view');
+        }
+    }
+
+    public function userEdit($id) {
+        $user = Users::find($id);
+        $data = [
+            'isi' => $user,
+        ];
+        return View::make('users.edit', $data);
+    }
+
+    public function prosesUpdate($id) {
+        // validation
+        $rules = array(
+            'username' => 'required',
+            'password' => 'required',
+            'email' => 'required|email',
+            'level' => 'required'
+        );
+        $validator = Validator::make(Input::all(), $rules);
+        // jika tidak valid redirect ke halaman edit
+        if ($validator->fails()) {
+            return Redirect::to("/users/edit/" . $id)
+                            ->withErrors($validator);
+        } else {
+            // jika valid disimpan
+            $in = Input::all();
+            $pass = $in['password'];
+            $pass = Hash::make($pass);
+            $user = Users::find($id);
+            $user->username = $in['username'];
+            $user->password = $pass;
+            $user->email = $in['email'];
+            $user->level = $in['level'];
+            $user->save();
+            // redirect ke halaman band index
+            Session::flash('message', 'Successfully updated Users!');
+            return Redirect::to('/users/view');
+        }
+    }
+
+    public function userView() {
+        $user_pag = Users::paginate(2);
+        $data = [
+            'users' => $user_pag,
+        ];
+
+        return View::make('users.view', $data);
+    }
+
+    public function userDelete($id) {
+        // delete
+        $user = Users::find($id);
+        $user->delete();
+        Session::flash('message', 'Successfully deleted the Users!');
+        return Redirect::to('/users/view');
+    }
+
+}
