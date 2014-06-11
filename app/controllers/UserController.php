@@ -62,7 +62,7 @@ class UserController extends AdminController {
              */
             $in = Input::all();
             $pass = $in['password'];
-            $pass = Crypt::encrypt($pass);
+            $pass = Hash::make($pass);
             $user = new Users;
             $user->username = $in['username'];
             $user->password = $pass;
@@ -112,7 +112,7 @@ class UserController extends AdminController {
             // jika valid disimpan
             $in = Input::all();
             $pass = $in['password'];
-            $pass = Crypt::encrypt($pass);
+            $pass = Hash::make($pass);
             $user = Users::find($id);
             $user->username = $in['username'];
             $user->password = $pass;

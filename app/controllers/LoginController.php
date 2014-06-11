@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Controllers\BandController;
@@ -8,10 +9,11 @@ use Auth;
 use Redirect;
 use Session;
 use App\Models\Users;
+use Illuminate\Support\Facades\Crypt;
 use View;
 
 class LoginController extends BaseController {
-   
+
     /**
      * 
      * @return View
@@ -19,7 +21,7 @@ class LoginController extends BaseController {
     public function index() {
         return View::make('login.index');
     }
-    
+
     /**
      * 
      * @return Redirect
@@ -31,28 +33,30 @@ class LoginController extends BaseController {
             'password' => 'required'
         ];
         $valid = Validator::make($inp, $rules);
-        if($valid->fails()){
+        if ($valid->fails()) {
             return Redirect::to('/login')->withErrors($valid);
-        }else{
+        } else {
+            $pass = $inp['password'];
+            $email = $inp['email'];
             $data = [
-              'email' => $inp['email'],
-              'password' => $inp['password']
+                'email' => $email,
+                'password' => $pass,
             ];
-            if(Auth::attempt($data)){
+            if (Auth::attempt($data)) {
                 Session::flash('message', 'Successfully Login!');
                 return Redirect::intended('/users');
-            }else{
+            } else {
                 Session::flash('message', 'Email dan Password no valid!');
                 return Redirect::to('/login');
             }
         }
     }
-    
+
     /**
      * 
      * @return Redirect
      */
-    public function doLogout(){
+    public function doLogout() {
         Auth::Logout();
         return Redirect::to('login');
     }

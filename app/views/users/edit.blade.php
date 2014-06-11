@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
                     <div class="col-sm-4">
-                        <input type="text" name="password" value="<?php echo Crypt::decrypt($isi->password); ?>" class="form-control">
+                        <input type="text" name="password" value="<?php echo $isi->password ?>" class="form-control">
                         <p style="color: red"> {{ $errors->first('password') }} </p>
                     </div>
                 </div>
