@@ -11,7 +11,9 @@ use Hash;
 use Validator;
 use Redirect;
 use Session;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Paginator;
+
 /**
  * Description of TestController
  *
@@ -20,7 +22,7 @@ use Illuminate\Support\Facades\Paginator;
  * class userController
  */
 class UserController extends AdminController {
-    
+
     /**
      * 
      * @return View
@@ -60,7 +62,7 @@ class UserController extends AdminController {
              */
             $in = Input::all();
             $pass = $in['password'];
-            $pass = Hash::make($pass);
+            $pass = Crypt::encrypt($pass);
             $user = new Users;
             $user->username = $in['username'];
             $user->password = $pass;
@@ -110,7 +112,7 @@ class UserController extends AdminController {
             // jika valid disimpan
             $in = Input::all();
             $pass = $in['password'];
-            $pass = Hash::make($pass);
+            $pass = Crypt::encrypt($pass);
             $user = Users::find($id);
             $user->username = $in['username'];
             $user->password = $pass;
@@ -122,7 +124,7 @@ class UserController extends AdminController {
             return Redirect::to('/users/view');
         }
     }
-    
+
     /**
      * 
      * @return View
