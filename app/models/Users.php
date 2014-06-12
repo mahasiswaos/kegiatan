@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class Users extends Eloquent implements UserInterface, RemindableInterface {
 
@@ -40,7 +42,7 @@ class Users extends Eloquent implements UserInterface, RemindableInterface {
      * @return string
      */
     public function getAuthPassword() {
-        return $this->password;
+        return Hash::make(Crypt::decrypt($this->password));
     }
 
     /**
