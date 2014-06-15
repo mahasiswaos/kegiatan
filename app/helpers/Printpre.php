@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of Printpre
  *
@@ -13,6 +7,15 @@
  */
 class PrintPre {
 
+    /**
+     * Method ini digunakan untuk mencetak
+     * array, object dan berbagai macam
+     * tipe data dalam struktrur yang rapi
+     * menggunakan tag pre html
+     * 
+     * @param mix $var
+     * @param boolean $detail
+     */
     public static function out($var, $detail = false) {
         if ($detail == false) {
             echo "<pre>";
