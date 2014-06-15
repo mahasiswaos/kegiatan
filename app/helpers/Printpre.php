@@ -11,9 +11,9 @@
  *
  * @author aljufry
  */
-class Printpre {
+class PrintPre {
 
-    public static function aut($var, $detail = false) {
+    public static function out($var, $detail = false) {
         if ($detail == false) {
             echo "<pre>";
             print_r($var);
