@@ -46,7 +46,7 @@ class LoginController extends BaseController {
                 Session::flash('message', 'Successfully Login!');
                 return Redirect::intended('/users');
             } else {
-                Session::flash('message', 'Email dan Password no valid!');
+                Session::flash('message', 'Wrong Username and or Password!!!');
                 return Redirect::to('/login');
             }
         }

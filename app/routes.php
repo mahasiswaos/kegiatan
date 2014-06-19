@@ -12,7 +12,9 @@
  */
 
 
-//Route::get('/', 'App\\Controllers\\TestController@index');
+Route::get('/test', 'App\\Controllers\\TestController@index');
+
+Route::get('/', 'App\\Controllers\\LoginController@index');
 
 Route::get('/login', 'App\\Controllers\\LoginController@index');
 
