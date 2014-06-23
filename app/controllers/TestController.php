@@ -6,6 +6,7 @@ use App\Controllers\AdminController;
 use App\Controllers\BaseController;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Users;
 
 /**
  * Description of TestController
@@ -15,9 +16,12 @@ use Illuminate\Support\Facades\Auth;
 class TestController extends BaseController {
 
     public function index() {
-        $var = 'haidar';
-        $secret = Crypt::encrypt($var);
-        Printpre::out($secret);
+		$inp = Input::all();
+		
+        $a = Users::find(1);
+        echo "<pre>";
+        print_r($a);
+        echo "</pre>";
     }
 
 }

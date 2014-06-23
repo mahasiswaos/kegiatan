@@ -10,9 +10,10 @@
 <div class="row">
     <div class="col-xs-6 col-sm-3"></div>
     <div class="col-xs-6 col-sm-8">
-        <div class="panel-body"></div>
+        <!--<div class="panel-body"></div>-->
+        <br/>
         <div class="col-sm-8">
-            <div class="panel panel-info">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="glyphicon glyphicon-plus"></i> 
                     <b>Form Login Administrator</b>
@@ -20,7 +21,7 @@
                 <div class="panel-body">
                     <form class="form-horizontal" action="<?php echo URL::to("/login/proses"); ?>" method="post">
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                            <label class="col-sm-2 control-label">Email</label>
                             <div class="col-sm-9">
                                 <input type="text" name="email" class="form-control " placeholder="john@doe.com">
                                 <p style="color: red"> {{ $errors->first('email') }} </p>

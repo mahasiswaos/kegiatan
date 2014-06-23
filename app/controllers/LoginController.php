@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BandController;
+
 use Input;
 use Validator;
 use Auth;

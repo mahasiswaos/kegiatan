@@ -39,7 +39,7 @@ class AdminController extends BaseController {
     function __construct() {
         
         /**
-         * 
+         * Sintaks ini untuk memblock semua halaman k
          */
         $this->beforeFilter('auth', array('except' => '/login'));
     }
